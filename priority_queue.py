@@ -15,9 +15,9 @@ def extract_max():
     return m
 
 def shift_up(i):
-    while queue_max[i] > queue_max[i // 2]:
-        queue_max[i], queue_max[i // 2] =   queue_max[i // 2], queue_max[i]
-        i = i // 2
+    while queue_max[i] > queue_max[(i - 1) // 2] and (i-1) // 2 > -1:
+        queue_max[i], queue_max[(i - 1) // 2] =   queue_max[(i - 1) // 2], queue_max[i]
+        i = (i - 1) // 2
 
 def shift_down(i):
     while i*2 + 1 < len(queue_max):
@@ -49,5 +49,6 @@ with open('input_queue_commands', 'r') as text:
                         insert(int(command[1]))
                 elif 'Extract' in command[0]:
                         result.append(extract_max())
+                print(queue_max, command)
 for number in result:
     print(number)
